@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:journal/src/modules/splash/splash_page.dart';
+import 'package:journal/src/shared/constants/app_routes.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -8,7 +10,10 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Container(),
+      initialRoute: AppRoutes.kSplash,
+      routes: {
+        AppRoutes.kSplash: (context) => SplashPage(),
+      },
     );
   }
 }
