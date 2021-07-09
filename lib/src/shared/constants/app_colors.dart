@@ -19,6 +19,6 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     stops: [0.1, 0.7],
-    transform: GradientRotation((-34 * pi) / 4),
+    transform: GradientRotation((-34 * pi) / 180), // graus para radianos
   );
 }

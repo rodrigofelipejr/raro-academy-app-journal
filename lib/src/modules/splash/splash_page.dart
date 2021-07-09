@@ -1,8 +1,9 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:journal/src/shared/constants/app_colors.dart';
-import 'package:journal/src/shared/constants/contsnates.dart';
+
+import '../../shared/constants/app_colors.dart';
+import '../../shared/constants/constants.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -13,9 +14,15 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
-  Widget build(BuildContext context) {
-    final Size screen = MediaQuery.of(context).size;
+  void initState() {
+    super.initState();
+    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
+      Future.delayed(Duration(seconds: 2)).then((value) => Navigator.pushReplacementNamed(context, AppRoutes.kHome));
+    });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -23,12 +30,15 @@ class _SplashPageState extends State<SplashPage> {
         decoration: BoxDecoration(
           gradient: AppColors.kBlueGradient,
         ),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 60, bottom: 40.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: Center(
+        child: Column(
+          children: [
+            Expanded(
+              child: AnimatedCard(
+                direction: AnimatedCardDirection.top,
+                duration: Duration(seconds: 1),
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.only(top: 60.0),
                   child: Stack(
                     alignment: AlignmentDirectional.topCenter,
                     children: [
@@ -38,14 +48,11 @@ class _SplashPageState extends State<SplashPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 10.0),
-                              child: Text(
-                                'journal',
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    fontSize: 72.0,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white,
-                                  ),
+                              child: Hero(
+                                tag: 'hero_journal',
+                                child: Text(
+                                  'journal',
+                                  style: AppTypography.white72w700Montserrat(),
                                 ),
                               ),
                             ),
@@ -54,15 +61,7 @@ class _SplashPageState extends State<SplashPage> {
                               right: 12.0,
                               child: Text(
                                 'YOUR ACADEMY\'S BEST FRIEND',
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    fontSize: 12.5,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                    letterSpacing: 1.0,
-                                    // fontFamily: 'Montserrat',
-                                  ),
-                                ),
+                                style: AppTypography.white13w400Montserrat(),
                               ),
                             ),
                           ],
@@ -70,25 +69,43 @@ class _SplashPageState extends State<SplashPage> {
                       ),
                       Positioned(
                         top: 0,
-                        child: SvgPicture.asset(
-                          AppImages.logoJournalIcon,
-                          height: 90,
-                          width: 90,
+                        child: Hero(
+                          tag: 'hero_logo_journal',
+                          child: SvgPicture.asset(
+                            AppImages.logoJournalIcon,
+                            height: 90,
+                            width: 90,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-              Center(
-                child: SvgPicture.asset(
-                  AppImages.logoRaroAcademy,
-                  height: 100,
-                  width: 100,
+            ),
+            AnimatedCard(
+              direction: AnimatedCardDirection.bottom,
+              duration: Duration(seconds: 1),
+              child: Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.only(bottom: 40.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'powered by',
+                      style: AppTypography.whiteOpacity13w300Roboto(),
+                    ),
+                    SizedBox(height: 10.0),
+                    SvgPicture.asset(
+                      AppImages.logoRaroAcademy,
+                      height: 100,
+                      width: 100,
+                    ),
+                  ],
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );
