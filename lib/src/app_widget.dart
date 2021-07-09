@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:journal/src/modules/splash/splash_page.dart';
-import 'package:journal/src/shared/constants/app_routes.dart';
+
+import 'modules/modules.dart';
+import 'shared/constants/constants.dart';
 
 class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Journal',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -13,6 +15,7 @@ class AppWidget extends StatelessWidget {
       initialRoute: AppRoutes.kSplash,
       routes: {
         AppRoutes.kSplash: (context) => SplashPage(),
+        AppRoutes.kHome: (context) => HomePage(),
       },
     );
   }
