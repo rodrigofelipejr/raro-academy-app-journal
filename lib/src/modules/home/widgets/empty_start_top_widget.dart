@@ -18,7 +18,7 @@ class EmptyStartTopWidget extends StatelessWidget {
           ),
           child: Image.asset(
             AppImages.studentBackground,
-            fit: BoxFit.fitHeight,
+            fit: BoxFit.cover,
             colorBlendMode: BlendMode.modulate,
           ),
         ),

@@ -17,7 +17,7 @@ class EmptyStartBottomWidget extends StatelessWidget {
       ),
       child: Container(
         height: MediaQuery.of(context).size.height * 0.4,
-        padding: const EdgeInsets.fromLTRB(40.0, 36.0, 40.0, 0),
+        padding: const EdgeInsets.fromLTRB(36.0, 24.0, 36.0, 0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,

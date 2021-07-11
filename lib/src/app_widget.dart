@@ -16,6 +16,7 @@ class AppWidget extends StatelessWidget {
       routes: {
         AppRoutes.kSplash: (context) => SplashPage(),
         AppRoutes.kHome: (context) => HomePage(),
+        AppRoutes.kNotes: (context) => EditNotePage(),
       },
     );
   }

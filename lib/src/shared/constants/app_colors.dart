@@ -9,8 +9,11 @@ class AppColors {
   static const Color kCyan = Color(0xFF44C2FD);
   static const Color kYellow = Color(0xFFFAC736);
   static const Color kWhite = Color(0xFFFFFFFF);
+  static const Color kRed = Color(0xFFFF616D);
   static const Color kGreyMedium = Color.fromRGBO(0, 0, 0, 0.54);
-  static const Color kBlack = Color.fromRGBO(0, 0, 0, 0.54);
+  static const Color kBlack = Color.fromRGBO(0, 0, 0, 1);
+  static const Color kPerano = Color(0xFFA7A4F1);
+  static const Color kTransparent = Colors.transparent;
   static const LinearGradient kBlueGradient = LinearGradient(
     colors: <Color>[
       kCyan,
@@ -20,5 +23,15 @@ class AppColors {
     end: Alignment.bottomRight,
     stops: [0.1, 0.7],
     transform: GradientRotation((-34 * pi) / 180), // graus para radianos
+  );
+  static const LinearGradient kBlueGradientButton = LinearGradient(
+    colors: <Color>[
+      kCyan,
+      kPurpleDark,
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    stops: [0.05, 0.8],
+    transform: GradientRotation((40 * pi) / 180), // graus para radianos
   );
 }

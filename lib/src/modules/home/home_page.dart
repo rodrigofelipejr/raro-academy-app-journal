@@ -18,7 +18,9 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButtonWidget(),
+      floatingActionButton: FloatingActionButtonWidget(
+        onTap: () => Navigator.pushNamed(context, AppRoutes.kNotes),
+      ),
       body: Container(
         height: double.infinity,
         width: double.infinity,
