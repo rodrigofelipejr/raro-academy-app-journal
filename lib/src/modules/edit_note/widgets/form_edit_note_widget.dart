@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:journal/src/shared/constants/constants.dart';
+import 'package:journal/src/modules/edit_note/edit_note_controller.dart';
+import 'package:journal/src/shared/validators/description/description_validator.dart';
+import 'package:journal/src/shared/validators/title/title_validator.dart';
 
-import 'package:journal/src/shared/widgets/widgets.dart';
+import '../../../shared/constants/constants.dart';
+import '../../../shared/widgets/widgets.dart';
+import '../../../shared/mixins/mixins.dart';
 
 import 'widgets.dart';
 
@@ -12,9 +16,10 @@ class FormEditNoteWidget extends StatefulWidget {
   _FormEditNoteWidgetState createState() => _FormEditNoteWidgetState();
 }
 
-class _FormEditNoteWidgetState extends State<FormEditNoteWidget> {
+class _FormEditNoteWidgetState extends State<FormEditNoteWidget> with KeyboardManager {
   final List<DropdownMenuItem<String>> _dropdownItems = [];
   final _formKey = GlobalKey();
+  late final EditNoteController controller;
 
   final Map<String, dynamic> _dropdownOptions = {
     'rosa': AppColors.kPink,
@@ -29,6 +34,7 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> {
   @override
   void initState() {
     super.initState();
+    // controller = context.read<EditNoteController>();
     _buildOptionsDropdown();
     _typeNote = _dropdownOptions.entries.first.key;
   }
@@ -51,7 +57,7 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> {
                       child: TextFormFieldWidget(
                         label: 'Título',
                         onChange: (value) {},
-                        validator: (value) {},
+                        validator: TitleValidator.validate,
                         labelStyle: AppTypography.gray16w700Roboto(),
                       ),
                     ),
@@ -67,7 +73,7 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> {
                   child: TextFormFieldWidget(
                     label: 'Digite aqui...',
                     onChange: (value) {},
-                    validator: (value) {},
+                    validator: DescriptionValidator.validate,
                     expands: true,
                     maxLines: null,
                     textInputType: TextInputType.multiline,

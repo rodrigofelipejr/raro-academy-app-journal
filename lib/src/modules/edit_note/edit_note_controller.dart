@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:journal/src/shared/models/note_model.dart';
+
+import '../../shared/models/note_model.dart';
 
 class EditNoteController extends ChangeNotifier {
   late NoteModel _note;

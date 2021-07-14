@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:journal/src/shared/constants/app_colors.dart';
-import 'package:journal/src/shared/constants/constants.dart';
+
+import '../../constants/app_colors.dart';
+import '../../constants/constants.dart';
 
 class ElevatedButtonWidget extends StatelessWidget {
   final void Function()? onPressed;
