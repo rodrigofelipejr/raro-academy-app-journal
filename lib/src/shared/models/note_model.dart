@@ -1,30 +1,73 @@
 import 'dart:convert';
 
+import 'package:uuid/uuid.dart';
+
 class NoteModel {
+  final String id = Uuid().v1();
   final String color;
   final String title;
   final String description;
-  final DateTime date;
+  final DateTime? date;
   final String? attachment;
   final bool isFavorite;
+  final DateTime createdAt = DateTime.now();
+  final DateTime? updatedAt;
 
   NoteModel({
     required this.color,
     required this.title,
     required this.description,
-    required this.date,
+    this.date,
     this.attachment,
     this.isFavorite = false,
+    this.updatedAt,
   });
+
+  NoteModel.empty({
+    String? color,
+    String? title,
+    String? description,
+    DateTime? date,
+    String? attachment = '',
+    bool? isFavorite,
+    DateTime? updatedAt,
+  })  : color = color ?? '',
+        title = title ?? '',
+        description = description ?? '',
+        date = date ?? null,
+        attachment = attachment ?? '',
+        isFavorite = isFavorite ?? false,
+        updatedAt = date ?? null;
+
+  NoteModel copyWith({
+    String? color,
+    String? title,
+    String? description,
+    DateTime? date,
+    String? attachment,
+    bool? isFavorite,
+    DateTime? updatedAt,
+  }) {
+    return NoteModel(
+      color: color ?? this.color,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      date: date ?? this.date,
+      attachment: attachment ?? this.attachment,
+      isFavorite: isFavorite ?? this.isFavorite,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
 
   Map<String, dynamic> toMap() {
     return {
       'color': color,
       'title': title,
       'description': description,
-      'date': date.millisecondsSinceEpoch,
+      'date': date?.toIso8601String(),
       'attachment': attachment,
       'isFavorite': isFavorite,
+      'updatedAt': updatedAt?.toIso8601String(),
     };
   }
 
@@ -36,30 +79,13 @@ class NoteModel {
       date: DateTime.fromMillisecondsSinceEpoch(map['date']),
       attachment: map['attachment'],
       isFavorite: map['isFavorite'],
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(map['updatedAt']),
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory NoteModel.fromJson(String source) => NoteModel.fromMap(json.decode(source));
-
-  NoteModel copyWith({
-    String? color,
-    String? title,
-    String? description,
-    DateTime? date,
-    String? attachment,
-    bool? isFavorite,
-  }) {
-    return NoteModel(
-      color: color ?? this.color,
-      title: title ?? this.title,
-      description: description ?? this.description,
-      date: date ?? this.date,
-      attachment: attachment ?? this.attachment,
-      isFavorite: isFavorite ?? this.isFavorite,
-    );
-  }
 
   @override
   bool operator ==(Object other) {
@@ -71,7 +97,8 @@ class NoteModel {
         other.description == description &&
         other.date == date &&
         other.attachment == attachment &&
-        other.isFavorite == isFavorite;
+        other.isFavorite == isFavorite &&
+        other.updatedAt == updatedAt;
   }
 
   @override
@@ -81,11 +108,12 @@ class NoteModel {
         description.hashCode ^
         date.hashCode ^
         attachment.hashCode ^
-        isFavorite.hashCode;
+        isFavorite.hashCode ^
+        updatedAt.hashCode;
   }
 
   @override
   String toString() {
-    return 'NoteModel(color: $color, title: $title, description: $description, date: $date, attachment: $attachment, isFavorite: $isFavorite)';
+    return 'NoteModel(color: $color, title: $title, description: $description, date: $date, attachment: $attachment, isFavorite: $isFavorite, updatedAt: $updatedAt)';
   }
 }
