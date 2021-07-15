@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:journal/src/modules/edit_note/edit_note_controller.dart';
-import 'package:journal/src/shared/validators/description/description_validator.dart';
-import 'package:journal/src/shared/validators/title/title_validator.dart';
+import 'package:provider/provider.dart';
 
+import '../edit_note_controller.dart';
+import '../../../shared/validators/validators.dart';
 import '../../../shared/constants/constants.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../../shared/mixins/mixins.dart';
@@ -17,10 +17,10 @@ class FormEditNoteWidget extends StatefulWidget {
 }
 
 class _FormEditNoteWidgetState extends State<FormEditNoteWidget> with KeyboardManager {
-  final List<DropdownMenuItem<String>> _dropdownItems = [];
-  final _formKey = GlobalKey();
-  late final EditNoteController controller;
+  late final EditNoteController _controller;
 
+  final _formKey = GlobalKey<FormState>();
+  final List<DropdownMenuItem<String>> _dropdownItems = [];
   final Map<String, dynamic> _dropdownOptions = {
     'rosa': AppColors.kPink,
     'verde': AppColors.kGreen,
@@ -29,72 +29,12 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> with KeyboardMa
     'amarelo': AppColors.kYellow,
   };
 
-  late String _typeNote;
-
   @override
   void initState() {
     super.initState();
-    // controller = context.read<EditNoteController>();
+    _controller = context.read<EditNoteController>();
     _buildOptionsDropdown();
-    _typeNote = _dropdownOptions.entries.first.key;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Stack(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormFieldWidget(
-                        label: 'Título',
-                        onChange: (value) {},
-                        validator: TitleValidator.validate,
-                        labelStyle: AppTypography.gray16w700Roboto(),
-                      ),
-                    ),
-                    DropdownButtonWidget<String>(
-                      value: _typeNote,
-                      items: _dropdownItems,
-                      onChanged: _handleChangeDropdown,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 12.0),
-                Expanded(
-                  child: TextFormFieldWidget(
-                    label: 'Digite aqui...',
-                    onChange: (value) {},
-                    validator: DescriptionValidator.validate,
-                    expands: true,
-                    maxLines: null,
-                    textInputType: TextInputType.multiline,
-                    textInputAction: TextInputAction.newline,
-                    textAlignVertical: TextAlignVertical.top,
-                  ),
-                ),
-              ],
-            ),
-            Positioned(
-              bottom: 14.0,
-              right: 14.0,
-              child: ElevatedButtonWidget(
-                onPressed: () {},
-                label: 'SALVAR',
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    _controller.onLoadNotes();
   }
 
   void _buildOptionsDropdown() {
@@ -117,9 +57,60 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> with KeyboardMa
     });
   }
 
-  void _handleChangeDropdown(String? value) {
-    setState(() {
-      _typeNote = value!;
-    });
+  void _handleSubmitForm() async {
+    if (_formKey.currentState?.validate() == true) {
+      await _controller.onSave();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Stack(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextFormFieldWidget(
+                        label: 'Título',
+                        onChange: (value) => _controller.onChange(title: value),
+                        validator: TitleValidator.validate,
+                        labelStyle: AppTypography.gray16w700Roboto(),
+                      ),
+                    ),
+                    DropdownButtonWidget<String>(
+                      value: _dropdownOptions.entries.first.key,
+                      items: _dropdownItems,
+                      onChanged: (value) => _controller.onChange(color: value),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 12.0),
+                Expanded(
+                  child: TextFormFieldWidget(
+                    label: 'Digite aqui...',
+                    onChange: (value) => _controller.onChange(description: value),
+                    validator: DescriptionValidator.validate,
+                    expands: true,
+                    maxLines: null,
+                    textInputType: TextInputType.multiline,
+                    textInputAction: TextInputAction.newline,
+                    textAlignVertical: TextAlignVertical.top,
+                  ),
+                ),
+              ],
+            ),
+            ButtonSaveNoteWidget(onPressed: _handleSubmitForm),
+          ],
+        ),
+      ),
+    );
   }
 }

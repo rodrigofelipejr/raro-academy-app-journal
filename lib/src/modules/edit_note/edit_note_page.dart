@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:journal/src/modules/edit_note/edit_note_controller.dart';
+import 'package:provider/provider.dart';
 
+import 'edit_note.dart';
+import 'widgets/widgets.dart';
+import '../../shared/repositories/repositories.dart';
+import '../../shared/models/models.dart';
 import '../../shared/mixins/mixins.dart';
 import '../../shared/widgets/widgets.dart';
-import 'widgets/widgets.dart';
 
 class EditNotePage extends StatefulWidget {
-  const EditNotePage({Key? key}) : super(key: key);
+  final NoteModel? note;
+
+  const EditNotePage({Key? key, this.note}) : super(key: key);
 
   @override
   _EditNotePageState createState() => _EditNotePageState();
@@ -15,12 +20,18 @@ class EditNotePage extends StatefulWidget {
 class _EditNotePageState extends State<EditNotePage> with KeyboardManager {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => hideKeyboard(context),
-      child: Scaffold(
-        appBar: AppBarWidget(),
-        body: FormEditNoteWidget(),
-        bottomNavigationBar: BottomOptionsBarWidget(),
+    return MultiProvider(
+      providers: [
+        Provider(create: (context) => NoteRepository()),
+        ChangeNotifierProvider(create: (context) => EditNoteController(context.read<NoteRepository>())),
+      ],
+      child: GestureDetector(
+        onTap: () => hideKeyboard(context),
+        child: Scaffold(
+          appBar: AppBarWidget(),
+          body: FormEditNoteWidget(),
+          bottomNavigationBar: BottomOptionsBarWidget(),
+        ),
       ),
     );
   }
