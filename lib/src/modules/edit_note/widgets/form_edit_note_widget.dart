@@ -34,7 +34,11 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> with KeyboardMa
     super.initState();
     _controller = context.read<EditNoteController>();
     _buildOptionsDropdown();
-    _controller.onLoadNotes();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   void _buildOptionsDropdown() {
@@ -59,7 +63,9 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> with KeyboardMa
 
   void _handleSubmitForm() async {
     if (_formKey.currentState?.validate() == true) {
-      await _controller.onSave();
+      final success = await _controller.saveNote();
+
+      if (success) Navigator.pop(context);
     }
   }
 

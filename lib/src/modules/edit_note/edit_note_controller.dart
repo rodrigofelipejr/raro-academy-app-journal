@@ -31,21 +31,12 @@ class EditNoteController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> onSave() async {
+  Future<bool> saveNote() async {
     try {
       await _repository.saveNoteLocalStorage(_note);
       return true;
     } catch (e) {
       return false;
     }
-  }
-
-  Future<void> onLoadNotes() async {
-    try {
-      final notes = await _repository.loadNotesLocalStorage();
-      print(notes[0]);
-      print(notes[0].runtimeType);
-      print(notes[0].toString());
-    } catch (e) {}
   }
 }
