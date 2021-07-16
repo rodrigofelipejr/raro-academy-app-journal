@@ -10,7 +10,8 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider(create: (_) => NoteRepository()),
+        Provider<NoteRepository>(create: (context) => NoteRepository()),
+        ChangeNotifierProvider(create: (context) => HomeController(context.read<NoteRepository>())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

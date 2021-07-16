@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'edit_note.dart';
@@ -22,8 +23,9 @@ class _EditNotePageState extends State<EditNotePage> with KeyboardManager {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider(create: (context) => NoteRepository()),
-        ChangeNotifierProvider(create: (context) => EditNoteController(context.read<NoteRepository>())),
+        ChangeNotifierProvider(
+          create: (context) => EditNoteController(context.read<NoteRepository>()),
+        ),
       ],
       child: GestureDetector(
         onTap: () => hideKeyboard(context),
@@ -36,5 +38,3 @@ class _EditNotePageState extends State<EditNotePage> with KeyboardManager {
     );
   }
 }
-
-//MediaQuery.of(context).viewInsets.bottom ==0 // Visibility

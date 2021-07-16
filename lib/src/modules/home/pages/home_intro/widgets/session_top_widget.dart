@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../shared/constants/constants.dart';
+import '../../../../../shared/constants/constants.dart';
 
-class EmptyStartTopWidget extends StatelessWidget {
-  const EmptyStartTopWidget({Key? key}) : super(key: key);
+class SessionTopWidget extends StatelessWidget {
+  const SessionTopWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

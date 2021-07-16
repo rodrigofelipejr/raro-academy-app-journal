@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'widgets/widgets.dart';
+import 'home.dart';
 import '../../shared/widgets/widgets.dart';
 import '../../shared/constants/constants.dart';
 
@@ -12,37 +13,39 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late final HomeController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = context.read<HomeController>();
+    _controller.fetchNotes();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-
     return Scaffold(
+      appBar: AppBarWidget(
+        lightTheme: false,
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButtonWidget(
         onTap: () => Navigator.pushNamed(context, AppRoutes.kNotes),
       ),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: AppColors.kBlueGradient,
-        ),
-        child: Stack(
-          alignment: AlignmentDirectional.center,
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: SizedBox(
-                height: screenSize.height * 0.7,
-                child: EmptyStartTopWidget(),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: EmptyStartBottomWidget(),
-            ),
-          ],
-        ),
+      body: Consumer<HomeController>(
+        builder: (context, controller, _) {
+          if (controller.state == HomeStatus.loading)
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+
+          if (controller.state == HomeStatus.error)
+            return Center(
+              child: Text('Error'),
+            );
+
+          return controller.notes.isEmpty ? HomeIntoPage() : HomeGridPage();
+        },
       ),
     );
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/constants/constants.dart';
+import '../../../../../shared/constants/constants.dart';
 
-class EmptyStartBottomWidget extends StatelessWidget {
-  const EmptyStartBottomWidget({Key? key}) : super(key: key);
+class SessionBottomWidget extends StatelessWidget {
+  const SessionBottomWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

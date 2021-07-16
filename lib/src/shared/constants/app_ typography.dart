@@ -80,4 +80,11 @@ class AppTypography {
         color: AppColors.kWhite,
         letterSpacing: 0.4,
       );
+
+  static TextStyle white16w700Roboto() => TextStyle(
+        fontFamily: 'Roboto',
+        fontSize: 16.0,
+        fontWeight: FontWeight.w700,
+        color: AppColors.kWhite,
+      );
 }
