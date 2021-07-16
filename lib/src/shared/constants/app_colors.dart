@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -14,24 +12,4 @@ class AppColors {
   static const Color kBlack = Color.fromRGBO(0, 0, 0, 1);
   static const Color kPerano = Color(0xFFA7A4F1);
   static const Color kTransparent = Colors.transparent;
-  static const LinearGradient kBlueGradient = LinearGradient(
-    colors: <Color>[
-      kCyan,
-      kPurpleDark,
-    ],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    stops: [0.1, 0.7],
-    transform: GradientRotation((-34 * pi) / 180), // graus para radianos
-  );
-  static const LinearGradient kBlueGradientButton = LinearGradient(
-    colors: <Color>[
-      kCyan,
-      kPurpleDark,
-    ],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    stops: [0.05, 0.8],
-    transform: GradientRotation((40 * pi) / 180), // graus para radianos
-  );
 }

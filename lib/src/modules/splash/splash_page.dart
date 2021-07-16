@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../shared/constants/app_colors.dart';
 import '../../shared/constants/constants.dart';
 
 class SplashPage extends StatefulWidget {
@@ -37,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
-          gradient: AppColors.kBlueGradient,
+          gradient: AppGradients.kBlueGradient,
         ),
         child: Column(
           children: [

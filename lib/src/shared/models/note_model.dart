@@ -82,7 +82,6 @@ class NoteModel {
   }
 
   factory NoteModel.fromMap(Map<String, dynamic> map) {
-    print(2);
     return NoteModel(
       id: map['id'],
       color: map['color'],

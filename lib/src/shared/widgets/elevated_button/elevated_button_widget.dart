@@ -19,7 +19,7 @@ class ElevatedButtonWidget extends StatelessWidget {
       constraints: const BoxConstraints(minHeight: 48.0),
       child: Container(
         decoration: BoxDecoration(
-          gradient: AppColors.kBlueGradientButton,
+          gradient: AppGradients.kBlueGradientButton,
           borderRadius: BorderRadius.all(Radius.circular(6.0)),
           boxShadow: [
             BoxShadow(

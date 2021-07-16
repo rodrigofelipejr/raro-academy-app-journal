@@ -18,7 +18,7 @@ class FloatingActionButtonWidget extends StatelessWidget {
         width: 56.0,
         height: 56.0,
         decoration: BoxDecoration(
-          gradient: AppColors.kBlueGradient,
+          gradient: AppGradients.kBlueGradient,
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
