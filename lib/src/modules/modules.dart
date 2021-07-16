@@ -1,3 +1,3 @@
-export 'splash/splash_page.dart';
-export 'home/home_page.dart';
-export 'edit_note/edit_note_page.dart';
+export 'splash/splash.dart';
+export 'home/home.dart';
+export 'edit_note/edit_note.dart';
