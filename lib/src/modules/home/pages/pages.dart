@@ -1,2 +1,2 @@
-export 'home_intro/home_intro_page.dart';
-export 'home_grid/home_grid_page.dart';
+export 'empty_notes/empty_notes_page.dart';
+export 'grid_notes/grid_notes_page.dart';

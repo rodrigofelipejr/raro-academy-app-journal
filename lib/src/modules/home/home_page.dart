@@ -25,13 +25,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(
-        lightTheme: false,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButtonWidget(
-        onTap: () => Navigator.pushNamed(context, AppRoutes.kNotes),
-      ),
       body: Consumer<HomeController>(
         builder: (context, controller, _) {
           if (controller.state == HomeStatus.loading)
@@ -44,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               child: Text('Error'),
             );
 
-          return controller.notes.isEmpty ? HomeIntoPage() : HomeGridPage();
+          return controller.notes.isEmpty ? EmptyNotesPage() : GridNotesPage();
         },
       ),
     );
