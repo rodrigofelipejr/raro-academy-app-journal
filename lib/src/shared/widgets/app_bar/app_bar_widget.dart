@@ -14,7 +14,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   String get assetLogo => lightTheme ? AppImages.logoJournalHorizontalPurple : AppImages.logoJournalHorizontalWhite;
   Gradient? get gradient => lightTheme ? null : AppGradients.kBlueGradientAppBar;
-  bool get backwardsCompatibility => lightTheme;
+  Brightness get statusBarIconBrightness => lightTheme ? Brightness.dark : Brightness.light;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +32,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: AppColors.kTransparent,
-        backwardsCompatibility: backwardsCompatibility,
-        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: AppColors.kTransparent),
+        backwardsCompatibility: false,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: AppColors.kTransparent,
+          statusBarIconBrightness: statusBarIconBrightness,
+        ),
       ),
     );
   }
