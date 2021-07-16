@@ -6,4 +6,5 @@ class AppImages {
   static const studentHat = '$_svg/student-hat.svg';
   static const studentBackground = '$_png/background-student.png';
   static const logoJournalHorizontalPurple = '$_svg/logo-journal-horizontal-purple.svg';
+  static const logoJournalHorizontalWhite = '$_svg/logo-journal-horizontal-white.svg';
 }
