@@ -29,6 +29,10 @@ class _GridNotesPageState extends State<GridNotesPage> {
       onRefresh: _controller.fetchNotes,
       child: Scaffold(
         appBar: AppBarWidget(lightTheme: false),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButtonWidget(
+          onTap: () => Navigator.pushNamed(context, AppRoutes.kNotes),
+        ),
         body: StaggeredGridView.countBuilder(
           staggeredTileBuilder: (index) => StaggeredTile.fit(1),
           mainAxisSpacing: 6,
@@ -39,10 +43,6 @@ class _GridNotesPageState extends State<GridNotesPage> {
           itemBuilder: (context, index) {
             return CardNoteWidget(note: _controller.notes[index]);
           },
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButtonWidget(
-          onTap: () => Navigator.pushNamed(context, AppRoutes.kNotes),
         ),
       ),
     );

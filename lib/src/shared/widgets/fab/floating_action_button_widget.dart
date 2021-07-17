@@ -20,24 +20,7 @@ class FloatingActionButtonWidget extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: AppGradients.kBlueGradient,
           shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.kBlack.withOpacity(0.12),
-              offset: Offset(0.0, 1.0),
-              blurRadius: 18.0,
-            ),
-            BoxShadow(
-              color: AppColors.kBlack.withOpacity(0.14),
-              offset: Offset(0.0, 6.0),
-              blurRadius: 10.0,
-            ),
-            BoxShadow(
-              color: AppColors.kBlack.withOpacity(0.20),
-              offset: Offset(0.0, 3.0),
-              blurRadius: 5.0,
-              spreadRadius: -1,
-            ),
-          ],
+          boxShadow: AppShadows.kShadowsFloatingActionButton(),
         ),
         child: Center(
           child: Icon(

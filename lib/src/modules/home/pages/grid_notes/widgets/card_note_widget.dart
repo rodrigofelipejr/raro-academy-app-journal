@@ -12,17 +12,25 @@ class CardNoteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: AppColors.kLilac,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          CardNoteTitleWidget(note: note),
-          CardNoteExtrasWidget(note: note),
-          CardNoteDescriptionWidget(description: note.description),
-          CardNoteCreateAtWidget(date: note.createdAt)
-        ],
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: AppShadows.kShadowsDefault(),
+        borderRadius: BorderRadius.circular(4.0),
+      ),
+      child: Card(
+        margin: EdgeInsets.zero,
+        elevation: 0,
+        color: AppColors.kLilac,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            CardNoteTitleWidget(note: note),
+            CardNoteExtrasWidget(note: note),
+            CardNoteDescriptionWidget(description: note.description),
+            CardNoteCreateAtWidget(date: note.createdAt)
+          ],
+        ),
       ),
     );
   }

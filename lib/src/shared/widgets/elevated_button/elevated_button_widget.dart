@@ -21,24 +21,7 @@ class ElevatedButtonWidget extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: AppGradients.kBlueGradientButton,
           borderRadius: BorderRadius.all(Radius.circular(6.0)),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.kBlack.withOpacity(0.12),
-              offset: Offset(0.0, 1.0),
-              blurRadius: 5.0,
-            ),
-            BoxShadow(
-              color: AppColors.kBlack.withOpacity(0.14),
-              offset: Offset(0.0, 2.0),
-              blurRadius: 2.0,
-            ),
-            BoxShadow(
-              color: AppColors.kBlack.withOpacity(0.20),
-              offset: Offset(0.0, 3.0),
-              blurRadius: 1.0,
-              spreadRadius: -2.0,
-            ),
-          ],
+          boxShadow: AppShadows.kShadowsDefault(),
         ),
         child: ElevatedButton(
           onPressed: onPressed,
