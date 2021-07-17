@@ -1,7 +1,7 @@
-import 'package:journal/src/shared/services/local_storage/local_storage.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../shared/models/note_model.dart';
+import '../../../shared/models/models.dart';
+import '../../services/services.dart';
 
 class NoteRepository {
   Future<void> saveNoteLocalStorage(NoteModel note) async {
@@ -19,8 +19,9 @@ class NoteRepository {
     List<String> listJson = await LocalStorage.get('notes') ?? [];
     if (listJson.isEmpty) return null;
 
-    var find = listJson.map((e) => NoteModel.fromJson(e)).toList().where((e) => e.id == id);
-    return find.isNotEmpty ? find as NoteModel : null;
+    var notes = listJson.map<NoteModel?>((e) => NoteModel.fromJson(e)).toList();
+    var note = notes.firstWhere((e) => e!.id == id, orElse: () => null);
+    return note;
   }
 
   NoteModel _normalizeNote(NoteModel note) {

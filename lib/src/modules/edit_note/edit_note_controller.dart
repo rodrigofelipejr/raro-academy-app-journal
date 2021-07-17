@@ -3,14 +3,27 @@ import 'package:flutter/material.dart';
 import '../../shared/repositories/repositories.dart';
 import '../../shared/models/models.dart';
 
+enum EditNoteStatus { none, loading, success, error }
+
 class EditNoteController extends ChangeNotifier {
-  final NoteRepository _repository;
+  final NoteRepository repository;
+  final String? id;
 
-  EditNoteController(this._repository);
+  EditNoteController({
+    required this.repository,
+    this.id,
+  }) {
+    init();
+  }
 
-  NoteModel _note = NoteModel.empty();
+  NoteModel note = NoteModel.empty();
+  EditNoteStatus status = EditNoteStatus.loading;
 
-  bool get buttonSaveVisible => _note.title.isNotEmpty && _note.description.isNotEmpty;
+  bool get buttonSaveVisible => note.title.isNotEmpty && note.description.isNotEmpty;
+
+  void init() async {
+    if (id != null) await loadNote();
+  }
 
   void onChange({
     String? color,
@@ -20,23 +33,39 @@ class EditNoteController extends ChangeNotifier {
     String? attachment,
     bool? isFavorite,
   }) {
-    _note = _note.copyWith(
-      color: color ?? _note.color,
-      title: title ?? _note.title,
-      description: description ?? _note.description,
-      date: date ?? _note.date,
-      attachment: attachment ?? _note.attachment,
-      isFavorite: isFavorite ?? _note.isFavorite,
+    note = note.copyWith(
+      color: color ?? note.color,
+      title: title ?? note.title,
+      description: description ?? note.description,
+      date: date ?? note.date,
+      attachment: attachment ?? note.attachment,
+      isFavorite: isFavorite ?? note.isFavorite,
     );
     notifyListeners();
   }
 
   Future<bool> saveNote() async {
     try {
-      await _repository.saveNoteLocalStorage(_note);
+      await repository.saveNoteLocalStorage(note);
       return true;
     } catch (e) {
       return false;
+    }
+  }
+
+  Future<void> loadNote() async {
+    try {
+      status = EditNoteStatus.loading;
+
+      await Future.delayed(Duration(seconds: 1));
+      final data = await repository.loadNoteLocalStorage(id!);
+      note = data != null ? data : note;
+
+      status = EditNoteStatus.success;
+    } catch (e) {
+      status = EditNoteStatus.error;
+    } finally {
+      notifyListeners();
     }
   }
 }

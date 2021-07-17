@@ -25,12 +25,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Consumer<HomeController>(
         builder: (context, controller, _) {
-          if (controller.state == HomeStatus.loading)
+          if (controller.status == HomeStatus.loading)
             return Center(
               child: CircularProgressIndicator(),
             );
 
-          if (controller.state == HomeStatus.error)
+          if (controller.status == HomeStatus.error)
             return Center(
               child: Text('Error'),
             );
