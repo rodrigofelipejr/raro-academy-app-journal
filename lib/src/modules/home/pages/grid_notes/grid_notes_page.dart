@@ -35,10 +35,10 @@ class _GridNotesPageState extends State<GridNotesPage> {
         ),
         body: StaggeredGridView.countBuilder(
           staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-          mainAxisSpacing: 6,
-          crossAxisSpacing: 6,
+          mainAxisSpacing: 12.0,
+          crossAxisSpacing: 12.0,
           crossAxisCount: 2,
-          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
           itemCount: _controller.notes.length,
           itemBuilder: (context, index) {
             return CardNoteWidget(note: _controller.notes[index]);

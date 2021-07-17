@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:journal/src/shared/constants/app_colors.dart';
-import 'package:journal/src/shared/constants/constants.dart';
 
-import '../../../../../shared/models/note_model.dart';
 import 'widgets.dart';
+import '../../../../../shared/constants/constants.dart';
+import '../../../../../shared/models/models.dart';
 
 class CardNoteWidget extends StatelessWidget {
   final NoteModel note;

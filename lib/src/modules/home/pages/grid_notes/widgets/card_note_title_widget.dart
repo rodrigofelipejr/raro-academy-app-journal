@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../shared/constants/constants.dart';
-import '../../../../../shared/models/note_model.dart';
+import '../../../../../shared/models/models.dart';
 
 class CardNoteTitleWidget extends StatelessWidget {
   final NoteModel note;
