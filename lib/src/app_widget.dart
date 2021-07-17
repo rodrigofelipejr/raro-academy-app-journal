@@ -16,15 +16,10 @@ class AppWidget extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Journal',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        initialRoute: AppRoutes.kSplash,
-        routes: {
-          AppRoutes.kSplash: (context) => SplashPage(),
-          AppRoutes.kHome: (context) => HomePage(),
-          AppRoutes.kNotes: (context) => EditNotePage(),
-        },
+        onGenerateInitialRoutes: (route) => [
+          MaterialPageRoute(builder: (_) => SplashPage()),
+        ],
+        onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );
   }

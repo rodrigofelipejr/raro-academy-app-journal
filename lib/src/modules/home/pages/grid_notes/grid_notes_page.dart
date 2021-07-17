@@ -31,7 +31,7 @@ class _GridNotesPageState extends State<GridNotesPage> {
         appBar: AppBarWidget(lightTheme: false),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButtonWidget(
-          onTap: () => Navigator.pushNamed(context, AppRoutes.kNotes),
+          onTap: () => Navigator.pushNamed(context, AppRoutes.kNoteDetails),
         ),
         body: StaggeredGridView.countBuilder(
           staggeredTileBuilder: (index) => StaggeredTile.fit(1),

@@ -14,7 +14,7 @@ class EmptyNotesPage extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButtonWidget(
-        onTap: () => Navigator.pushNamed(context, AppRoutes.kNotes),
+        onTap: () => Navigator.pushNamed(context, AppRoutes.kNoteDetails),
       ),
       body: Container(
         height: double.infinity,
