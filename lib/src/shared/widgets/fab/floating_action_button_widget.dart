@@ -10,22 +10,30 @@ class FloatingActionButtonWidget extends StatelessWidget {
     required this.onTap,
   }) : super(key: key);
 
+  double get sizeDefault => 56;
+  BorderRadius get borderRadius => BorderRadius.circular(sizeDefault);
+
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        width: 56.0,
-        height: 56.0,
-        decoration: BoxDecoration(
-          gradient: AppGradients.kBlueGradient,
-          shape: BoxShape.circle,
-          boxShadow: AppShadows.kShadowsFloatingActionButton(),
-        ),
-        child: Center(
-          child: Icon(
-            Icons.add,
-            color: Colors.white,
+    return Container(
+      decoration: BoxDecoration(
+        gradient: AppGradients.kBlueGradient,
+        color: AppColors.kCyan,
+        shape: BoxShape.circle,
+        boxShadow: AppShadows.kShadowsFloatingActionButton(),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: borderRadius,
+        child: InkWell(
+          borderRadius: borderRadius,
+          onTap: onTap,
+          child: Container(
+            width: sizeDefault,
+            height: sizeDefault,
+            child: Center(
+              child: Icon(Icons.add, color: Colors.white),
+            ),
           ),
         ),
       ),
