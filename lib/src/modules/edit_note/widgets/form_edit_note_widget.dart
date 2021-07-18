@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../edit_note_controller.dart';
@@ -85,6 +86,9 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> with KeyboardMa
                             validator: TitleValidator.validate,
                             initialValue: controller.note.title,
                             labelStyle: AppTypography.gray16w700Roboto(),
+                            textInputFormatter: [
+                              LengthLimitingTextInputFormatter(50),
+                            ],
                           ),
                         ),
                         DropdownButtonWidget<String>(
@@ -106,6 +110,9 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> with KeyboardMa
                         textInputType: TextInputType.multiline,
                         textInputAction: TextInputAction.newline,
                         textAlignVertical: TextAlignVertical.top,
+                        textInputFormatter: [
+                          LengthLimitingTextInputFormatter(500),
+                        ],
                       ),
                     ),
                   ],
