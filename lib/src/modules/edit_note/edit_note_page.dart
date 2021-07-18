@@ -44,7 +44,15 @@ class _EditNotePageState extends State<EditNotePage> with KeyboardManager {
           ),
           bottomNavigationBar: Consumer<EditNoteController>(
             builder: (_, controller, __) {
-              return controller.status.isSuccess ? BottomOptionsBarWidget() : SizedBox();
+              return controller.status.isSuccess
+                  ? BottomOptionsBarWidget(
+                      dateFunction: () {},
+                      attachFunction: () {},
+                      favoriteFunction: () => controller.onChange(isFavorite: !controller.note.isFavorite),
+                      shareFunction: () {},
+                      deleteFunction: () {},
+                    )
+                  : SizedBox();
             },
           ),
         ),
