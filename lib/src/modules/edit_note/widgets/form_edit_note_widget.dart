@@ -21,13 +21,6 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> with KeyboardMa
 
   final _formKey = GlobalKey<FormState>();
   final List<DropdownMenuItem<String>> _dropdownItems = [];
-  final Map<String, dynamic> _dropdownOptions = {
-    'rosa': AppColors.kPink,
-    'verde': AppColors.kGreen,
-    'roxo': AppColors.kPurpleDark,
-    'ciano': AppColors.kCyan,
-    'amarelo': AppColors.kYellow,
-  };
 
   @override
   void initState() {
@@ -42,7 +35,7 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> with KeyboardMa
   }
 
   void _buildOptionsDropdown() {
-    _dropdownOptions.forEach((k, v) {
+    AppColors.colorPalette.forEach((k, v) {
       _dropdownItems.add(
         DropdownMenuItem<String>(
           value: k,
@@ -88,16 +81,16 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> with KeyboardMa
                         Expanded(
                           child: TextFormFieldWidget(
                             label: 'Título',
-                            onChange: (value) => _controller.onChange(title: value),
+                            onChange: (value) => controller.onChange(title: value),
                             validator: TitleValidator.validate,
                             initialValue: controller.note.title,
                             labelStyle: AppTypography.gray16w700Roboto(),
                           ),
                         ),
                         DropdownButtonWidget<String>(
-                          value: _dropdownOptions.entries.first.key,
+                          value: controller.note.color,
                           items: _dropdownItems,
-                          onChanged: (value) => _controller.onChange(color: value),
+                          onChanged: (value) => controller.onChange(color: value),
                         ),
                       ],
                     ),
@@ -105,7 +98,7 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> with KeyboardMa
                     Expanded(
                       child: TextFormFieldWidget(
                         label: 'Digite aqui...',
-                        onChange: (value) => _controller.onChange(description: value),
+                        onChange: (value) => controller.onChange(description: value),
                         validator: DescriptionValidator.validate,
                         initialValue: controller.note.description,
                         expands: true,

@@ -16,7 +16,7 @@ class CardNoteTitleWidget extends StatelessWidget {
       ),
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 7.75),
       decoration: BoxDecoration(
-        color: AppColors.kGreen,
+        color: AppColors.colorPalette[note.color],
         borderRadius: BorderRadius.circular(4.0),
         boxShadow: AppShadows.kShadowsDefault(),
       ),

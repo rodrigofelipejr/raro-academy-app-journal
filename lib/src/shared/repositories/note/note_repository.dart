@@ -5,9 +5,31 @@ import '../../services/services.dart';
 
 class NoteRepository {
   Future<void> saveNoteLocalStorage(NoteModel note) async {
+    note.uid.isEmpty ? await _saveLocalStorage(note) : await _updateLocalStorage(note);
+  }
+
+  Future<void> _saveLocalStorage(NoteModel note) async {
     List<String> notes = await LocalStorage.get('notes') ?? [];
-    notes.add(_normalizeNote(note).toJson());
+
+    notes.add(note
+        .copyWith(
+          uid: Uuid().v1(),
+          createdAt: DateTime.now(),
+        )
+        .toJson());
+
     await LocalStorage.set('notes', notes);
+  }
+
+  Future<void> _updateLocalStorage(NoteModel note) async {
+    List<String> json = await LocalStorage.get('notes') ?? [];
+    List<NoteModel> notes = json.map((e) => NoteModel.fromJson(e)).toList();
+
+    notes[notes.indexWhere((e) => e.uid == note.uid)] = note.copyWith(
+      updatedAt: DateTime.now(),
+    );
+
+    await LocalStorage.set('notes', notes.map((e) => e.toJson()).toList());
   }
 
   Future<List<NoteModel?>> loadNotesLocalStorage() async {
@@ -20,18 +42,7 @@ class NoteRepository {
     if (listJson.isEmpty) return null;
 
     var notes = listJson.map<NoteModel?>((e) => NoteModel.fromJson(e)).toList();
-    var note = notes.firstWhere((e) => e!.id == id, orElse: () => null);
+    var note = notes.firstWhere((e) => e!.uid == id, orElse: () => null);
     return note;
-  }
-
-  NoteModel _normalizeNote(NoteModel note) {
-    return (note.id?.isEmpty == true)
-        ? note.copyWith(
-            id: Uuid().v1(),
-            createdAt: DateTime.now(),
-          )
-        : note.copyWith(
-            updatedAt: DateTime.now(),
-          );
   }
 }

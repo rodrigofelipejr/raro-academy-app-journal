@@ -12,7 +12,7 @@ class CardNoteWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, AppRoutes.kNoteDetails, arguments: note.id),
+      onTap: () => Navigator.pushNamed(context, AppRoutes.kNoteDetails, arguments: note.uid),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: AppShadows.kShadowsDefault(),

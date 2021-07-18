@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class NoteModel {
-  final String? id;
+  final String uid;
   final String color;
   final String title;
   final String description;
@@ -12,10 +12,10 @@ class NoteModel {
   final DateTime? updatedAt;
 
   NoteModel({
-    this.id,
-    required this.color,
-    required this.title,
-    required this.description,
+    this.uid = '',
+    this.color = 'verde',
+    this.title = '',
+    this.description = '',
     this.date,
     this.attachment,
     this.isFavorite = false,
@@ -23,28 +23,8 @@ class NoteModel {
     this.updatedAt,
   });
 
-  NoteModel.empty({
-    String? id,
-    String? color,
-    String? title,
-    String? description,
-    DateTime? date,
-    String? attachment = '',
-    bool? isFavorite,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  })  : id = id = '',
-        color = color ?? '',
-        title = title ?? '',
-        description = description ?? '',
-        date = date,
-        attachment = attachment,
-        isFavorite = isFavorite ?? false,
-        createdAt = createdAt,
-        updatedAt = updatedAt;
-
   NoteModel copyWith({
-    String? id,
+    String? uid,
     String? color,
     String? title,
     String? description,
@@ -55,7 +35,7 @@ class NoteModel {
     DateTime? updatedAt,
   }) {
     return NoteModel(
-      id: id ?? this.id,
+      uid: uid ?? this.uid,
       color: color ?? this.color,
       title: title ?? this.title,
       description: description ?? this.description,
@@ -69,7 +49,7 @@ class NoteModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      'uid': uid,
       'color': color,
       'title': title,
       'description': description,
@@ -83,7 +63,7 @@ class NoteModel {
 
   factory NoteModel.fromMap(Map<String, dynamic> map) {
     return NoteModel(
-      id: map['id'],
+      uid: map['uid'],
       color: map['color'],
       title: map['title'],
       description: map['description'],
@@ -106,7 +86,7 @@ class NoteModel {
     if (identical(this, other)) return true;
 
     return other is NoteModel &&
-        other.id == id &&
+        other.uid == uid &&
         other.color == color &&
         other.title == title &&
         other.description == description &&
@@ -119,7 +99,7 @@ class NoteModel {
 
   @override
   int get hashCode {
-    return id.hashCode ^
+    return uid.hashCode ^
         color.hashCode ^
         title.hashCode ^
         description.hashCode ^
@@ -132,6 +112,6 @@ class NoteModel {
 
   @override
   String toString() {
-    return 'NoteModel(id: $id, color: $color, title: $title, description: $description, date: $date, attachment: $attachment, isFavorite: $isFavorite, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'NoteModel(uid: $uid, color: $color, title: $title, description: $description, date: $date, attachment: $attachment, isFavorite: $isFavorite, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }

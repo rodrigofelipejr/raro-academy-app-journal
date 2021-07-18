@@ -16,13 +16,18 @@ class EditNoteController extends ChangeNotifier {
     init();
   }
 
-  NoteModel note = NoteModel.empty();
+  NoteModel note = NoteModel();
   EditNoteStatus status = EditNoteStatus.loading;
 
   bool get buttonSaveVisible => note.title.isNotEmpty && note.description.isNotEmpty;
 
   void init() async {
-    if (id != null) await loadNote();
+    if (id != null) {
+      await loadNote();
+    } else {
+      status = EditNoteStatus.success;
+      notifyListeners();
+    }
   }
 
   void onChange({

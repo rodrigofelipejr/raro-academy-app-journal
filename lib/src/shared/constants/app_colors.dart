@@ -13,4 +13,11 @@ class AppColors {
   static const Color kGreyMedium = Color.fromRGBO(0, 0, 0, 0.54);
   static const Color kPerano = Color(0xFFA7A4F1);
   static const Color kLilac = Color(0xFFF2F5FA);
+  static final Map<String, Color> colorPalette = {
+    'rosa': AppColors.kPink,
+    'verde': AppColors.kGreen,
+    'roxo': AppColors.kPurpleDark,
+    'ciano': AppColors.kCyan,
+    'amarelo': AppColors.kYellow,
+  };
 }
