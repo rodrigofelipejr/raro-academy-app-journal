@@ -22,6 +22,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       decoration: BoxDecoration(gradient: gradient),
       child: AppBar(
+        automaticallyImplyLeading: false, //TODO - e a usabilidade no android?
         title: Padding(
           padding: EdgeInsets.only(left: screenWidth * 0.039),
           child: SvgPicture.asset(
