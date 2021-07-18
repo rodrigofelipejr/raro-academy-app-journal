@@ -2,29 +2,28 @@ import 'package:flutter/material.dart';
 
 import '../../shared/models/models.dart';
 import '../../shared/repositories/repositories.dart';
-
-enum HomeStatus { none, loading, success, error }
+import '../../shared/mixins/mixins.dart';
 
 class HomeController extends ChangeNotifier {
   final NoteRepository _repository;
 
   HomeController(this._repository);
 
-  HomeStatus status = HomeStatus.loading;
+  StatusPage status = StatusPage.loading;
   final List<NoteModel> notes = [];
 
   Future<void> fetchNotes() async {
     try {
-      status = HomeStatus.loading;
+      status = StatusPage.loading;
 
       await Future.delayed(Duration(seconds: 2));
       final list = await _repository.loadNotesLocalStorage();
       notes.clear();
       notes.addAll(List.from(list));
 
-      status = HomeStatus.success;
+      status = StatusPage.success;
     } catch (error) {
-      status = HomeStatus.error;
+      status = StatusPage.error;
     } finally {
       notifyListeners();
     }

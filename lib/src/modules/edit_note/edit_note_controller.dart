@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../shared/mixins/mixins.dart';
 import '../../shared/repositories/repositories.dart';
 import '../../shared/models/models.dart';
-
-enum EditNoteStatus { none, loading, success, error }
 
 class EditNoteController extends ChangeNotifier {
   final NoteRepository repository;
@@ -17,7 +16,7 @@ class EditNoteController extends ChangeNotifier {
   }
 
   NoteModel note = NoteModel();
-  EditNoteStatus status = EditNoteStatus.loading;
+  StatusPage status = StatusPage.loading;
 
   bool get buttonSaveVisible => note.title.isNotEmpty && note.description.isNotEmpty;
 
@@ -25,7 +24,7 @@ class EditNoteController extends ChangeNotifier {
     if (id != null) {
       await loadNote();
     } else {
-      status = EditNoteStatus.success;
+      status = StatusPage.success;
       notifyListeners();
     }
   }
@@ -60,15 +59,15 @@ class EditNoteController extends ChangeNotifier {
 
   Future<void> loadNote() async {
     try {
-      status = EditNoteStatus.loading;
+      status = StatusPage.loading;
 
       await Future.delayed(Duration(seconds: 1));
       final data = await repository.loadNoteLocalStorage(id!);
       note = data != null ? data : note;
 
-      status = EditNoteStatus.success;
+      status = StatusPage.success;
     } catch (e) {
-      status = EditNoteStatus.error;
+      status = StatusPage.error;
     } finally {
       notifyListeners();
     }

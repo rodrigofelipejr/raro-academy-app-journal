@@ -7,19 +7,21 @@ class ProgressIndicatorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CircularProgressIndicator(
-            backgroundColor: AppColors.kPurpleDark,
-            color: AppColors.kCyan,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 14.0),
-            child: Text('Carregando...'),
-          )
-        ],
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(
+              backgroundColor: AppColors.kPurpleDark,
+              color: AppColors.kCyan,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 14.0),
+              child: Text('Carregando...'),
+            )
+          ],
+        ),
       ),
     );
   }
