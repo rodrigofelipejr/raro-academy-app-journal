@@ -23,7 +23,7 @@ class FloatingActionButtonWidget extends StatelessWidget {
         boxShadow: AppShadows.kShadowsFloatingActionButton(),
       ),
       child: Material(
-        color: Colors.transparent,
+        color: AppColors.kTransparent,
         borderRadius: borderRadius,
         child: InkWell(
           borderRadius: borderRadius,
