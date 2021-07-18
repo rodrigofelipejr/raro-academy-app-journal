@@ -22,22 +22,29 @@ class _HomePageState extends State<HomePage> {
     _controller.fetchNotes();
   }
 
+  Widget _buildBasePage(Widget body) => Scaffold(
+        appBar: AppBarWidget(lightTheme: false),
+        body: body,
+      );
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<HomeController>(
-        builder: (context, controller, _) {
-          if (controller.status.isLoading) {
-            return ProgressIndicatorWidget();
-          }
+    return Consumer<HomeController>(
+      builder: (context, controller, _) {
+        if (controller.status.isLoading) {
+          return _buildBasePage(
+            ProgressIndicatorWidget(),
+          );
+        }
 
-          if (controller.status.isErro) {
-            return ErrorIndicatorWidget();
-          }
+        if (controller.status.isErro) {
+          return _buildBasePage(
+            ErrorIndicatorWidget(),
+          );
+        }
 
-          return controller.notes.isEmpty ? EmptyNotesPage() : GridNotesPage();
-        },
-      ),
+        return controller.notes.isEmpty ? EmptyNotesPage() : GridNotesPage();
+      },
     );
   }
 }

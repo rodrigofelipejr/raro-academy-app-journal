@@ -25,25 +25,29 @@ class _EditNotePageState extends State<EditNotePage> with KeyboardManager {
         repository: context.read<NoteRepository>(),
         id: widget.id,
       ),
-      child: Consumer<EditNoteController>(
-        builder: (_, controller, __) {
-          if (controller.status.isLoading) {
-            return ProgressIndicatorWidget();
-          }
+      child: GestureDetector(
+        onTap: () => hideKeyboard(context),
+        child: Scaffold(
+          appBar: AppBarWidget(),
+          body: Consumer<EditNoteController>(
+            builder: (_, controller, __) {
+              if (controller.status.isLoading) {
+                return ProgressIndicatorWidget();
+              }
 
-          if (controller.status.isErro) {
-            return ErrorIndicatorWidget();
-          }
+              if (controller.status.isErro) {
+                return ErrorIndicatorWidget();
+              }
 
-          return GestureDetector(
-            onTap: () => hideKeyboard(context),
-            child: Scaffold(
-              appBar: AppBarWidget(),
-              body: FormEditNoteWidget(),
-              bottomNavigationBar: BottomOptionsBarWidget(),
-            ),
-          );
-        },
+              return FormEditNoteWidget();
+            },
+          ),
+          bottomNavigationBar: Consumer<EditNoteController>(
+            builder: (_, controller, __) {
+              return controller.status.isSuccess ? BottomOptionsBarWidget() : SizedBox();
+            },
+          ),
+        ),
       ),
     );
   }
