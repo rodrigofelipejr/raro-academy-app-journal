@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'home.dart';
+import '../../shared/widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -25,15 +26,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Consumer<HomeController>(
         builder: (context, controller, _) {
-          if (controller.status == HomeStatus.loading)
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+          if (controller.status == HomeStatus.loading) return ProgressIndicatorWidget();
 
-          if (controller.status == HomeStatus.error)
-            return Center(
-              child: Text('Error'),
-            );
+          if (controller.status == HomeStatus.error) return ErrorIndicatorWidget();
 
           return controller.notes.isEmpty ? EmptyNotesPage() : GridNotesPage();
         },

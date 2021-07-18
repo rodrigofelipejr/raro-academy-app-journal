@@ -27,15 +27,9 @@ class _EditNotePageState extends State<EditNotePage> with KeyboardManager {
       ),
       child: Consumer<EditNoteController>(
         builder: (_, controller, __) {
-          if (controller.status == EditNoteStatus.loading)
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+          if (controller.status == EditNoteStatus.loading) return ProgressIndicatorWidget();
 
-          if (controller.status == EditNoteStatus.error)
-            return Center(
-              child: Text('Error'),
-            );
+          if (controller.status == EditNoteStatus.error) return ErrorIndicatorWidget();
 
           return GestureDetector(
             onTap: () => hideKeyboard(context),
