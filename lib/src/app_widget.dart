@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'modules/modules.dart';
-import 'shared/constants/constants.dart';
+import 'shared/config/config.dart';
 import 'shared/repositories/repositories.dart';
 
 class AppWidget extends StatelessWidget {
