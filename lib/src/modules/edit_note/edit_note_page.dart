@@ -52,6 +52,7 @@ class _EditNotePageState extends State<EditNotePage> with KeyboardManager {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: SnackBarWidget(label: 'A nota foi removida'),
+          duration: Duration(seconds: 2),
         ),
       );
       Navigator.pop(context);
@@ -59,6 +60,7 @@ class _EditNotePageState extends State<EditNotePage> with KeyboardManager {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: SnackBarWidget(label: 'Erro ao excluir nota'),
+          duration: Duration(seconds: 2),
         ),
       );
     }

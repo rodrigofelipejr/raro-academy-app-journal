@@ -16,7 +16,7 @@ class HomeController extends ChangeNotifier {
     try {
       status = StatusPage.loading;
 
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(milliseconds: 500));
       final list = await _repository.loadNotesLocalStorage();
       notes.clear();
       notes.addAll(List.from(list));

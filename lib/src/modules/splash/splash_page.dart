@@ -19,7 +19,9 @@ class _SplashPageState extends State<SplashPage> {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
     SystemChrome.setEnabledSystemUIOverlays([]);
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
-      Future.delayed(Duration(seconds: 2)).then((value) => Navigator.pushReplacementNamed(context, AppRoutes.kHome));
+      Future.delayed(Duration(seconds: 2)).then(
+        (value) => Navigator.pushReplacementNamed(context, AppRoutes.kHome),
+      );
     });
   }
 

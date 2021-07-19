@@ -31,7 +31,10 @@ class _GridNotesPageState extends State<GridNotesPage> {
         appBar: AppBarWidget(lightTheme: false),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButtonWidget(
-          onTap: () => Navigator.pushNamed(context, AppRoutes.kNoteDetails),
+          onTap: () => Navigator.pushNamed(context, AppRoutes.kNoteDetails).then((_) async {
+            await _controller.fetchNotes();
+            setState(() {});
+          }),
         ),
         body: StaggeredGridView.countBuilder(
           staggeredTileBuilder: (index) => StaggeredTile.fit(1),
@@ -41,7 +44,17 @@ class _GridNotesPageState extends State<GridNotesPage> {
           padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
           itemCount: _controller.notes.length,
           itemBuilder: (context, index) {
-            return CardNoteWidget(note: _controller.notes[index]);
+            return CardNoteWidget(
+              note: _controller.notes[index],
+              onTap: () => Navigator.pushNamed(
+                context,
+                AppRoutes.kNoteDetails,
+                arguments: _controller.notes[index].uid,
+              ).then((_) async {
+                await _controller.fetchNotes();
+                setState(() {});
+              }),
+            );
           },
         ),
       ),

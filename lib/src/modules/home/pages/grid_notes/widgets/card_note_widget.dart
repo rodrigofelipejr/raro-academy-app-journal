@@ -6,8 +6,9 @@ import '../../../../../shared/models/models.dart';
 
 class CardNoteWidget extends StatelessWidget {
   final NoteModel note;
+  final void Function() onTap;
 
-  const CardNoteWidget({Key? key, required this.note}) : super(key: key);
+  const CardNoteWidget({Key? key, required this.note, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class CardNoteWidget extends StatelessWidget {
       child: Material(
         color: AppColors.kTransparent,
         child: InkWell(
-          onTap: () => Navigator.pushNamed(context, AppRoutes.kNoteDetails, arguments: note.uid),
+          onTap: onTap ,
           child: Card(
             margin: EdgeInsets.zero,
             elevation: 0,

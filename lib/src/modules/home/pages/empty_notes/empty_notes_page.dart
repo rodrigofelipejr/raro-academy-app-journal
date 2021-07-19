@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../modules.dart';
 import 'widgets/widgets.dart';
 import '../../../../shared/widgets/widgets.dart';
 import '../../../../shared/constants/constants.dart';
 
-class EmptyNotesPage extends StatelessWidget {
+class EmptyNotesPage extends StatefulWidget {
   const EmptyNotesPage({Key? key}) : super(key: key);
+
+  @override
+  _EmptyNotesPageState createState() => _EmptyNotesPageState();
+}
+
+class _EmptyNotesPageState extends State<EmptyNotesPage> {
+  late final HomeController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = context.read<HomeController>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +29,10 @@ class EmptyNotesPage extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButtonWidget(
-        onTap: () => Navigator.pushNamed(context, AppRoutes.kNoteDetails),
+        onTap: () => Navigator.pushNamed(context, AppRoutes.kNoteDetails).then((_) async {
+          await _controller.fetchNotes();
+          setState(() {});
+        }),
       ),
       body: Container(
         height: double.infinity,

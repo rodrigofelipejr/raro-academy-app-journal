@@ -61,7 +61,7 @@ class EditNoteController extends ChangeNotifier {
     try {
       status = StatusPage.loading;
 
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(Duration(milliseconds: 500));
       final data = await repository.loadNoteLocalStorage(id!);
       note = data != null ? data : note;
 
