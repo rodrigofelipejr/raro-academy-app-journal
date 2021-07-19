@@ -45,4 +45,15 @@ class NoteRepository {
     var note = notes.firstWhere((e) => e!.uid == id, orElse: () => null);
     return note;
   }
+
+  Future<bool> removeNoteLocalStorage(String id) async {
+    List<String> listJson = await LocalStorage.get('notes') ?? [];
+    if (listJson.isEmpty) return true;
+
+    var notes = listJson.map<NoteModel>((e) => NoteModel.fromJson(e)).toList();
+    notes.removeWhere((e) => e.uid == id);
+
+    var newNotes = notes.map((e) => e.toJson()).toList();
+    return await LocalStorage.set('notes', newNotes);
+  }
 }

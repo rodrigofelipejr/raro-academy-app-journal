@@ -72,4 +72,12 @@ class EditNoteController extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<bool> removeNote() async {
+    try {
+      return repository.removeNoteLocalStorage(id!);
+    } catch (e) {
+      return false;
+    }
+  }
 }

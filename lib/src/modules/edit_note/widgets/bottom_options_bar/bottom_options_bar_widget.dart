@@ -10,7 +10,7 @@ class BottomOptionsBarWidget extends StatelessWidget {
   final void Function() attachFunction;
   final void Function() favoriteFunction;
   final void Function() shareFunction;
-  final void Function() deleteFunction;
+  final void Function()? deleteFunction;
 
   const BottomOptionsBarWidget({
     Key? key,

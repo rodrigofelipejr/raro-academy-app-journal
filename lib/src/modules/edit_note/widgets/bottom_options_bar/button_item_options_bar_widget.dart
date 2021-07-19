@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/constants/constants.dart';
 
 class ButtonItemOptionsBarWidget extends StatefulWidget {
-  final void Function() onTap;
+  final void Function()? onTap;
   final IconData icon;
   final bool? initialValue;
   final IconData? activeIcon;
@@ -30,7 +30,7 @@ class _ButtonItemOptionsBarWidgetState extends State<ButtonItemOptionsBarWidget>
 
   IconData get iconData => isActive ? widget.activeIcon ?? widget.icon : widget.icon;
   Color get activeColor => widget.activeIcon != null ? widget.activeIconColor ?? defaultColor : defaultColor;
-  void Function() get onTap => widget.activeIcon != null ? _onTap : widget.onTap;
+  void Function()? get onTap => widget.activeIcon != null ? _onTap : widget.onTap;
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class _ButtonItemOptionsBarWidgetState extends State<ButtonItemOptionsBarWidget>
   }
 
   void _onTap() {
-    widget.onTap();
+    widget.onTap?.call();
     setState(() {
       isActive = !isActive;
     });
