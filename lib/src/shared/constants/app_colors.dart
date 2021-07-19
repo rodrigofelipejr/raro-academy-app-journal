@@ -6,6 +6,7 @@ class AppColors {
   static const Color kWhite = Color(0xFFFFFFFF);
   static const Color kPink = Color(0xFFF5487F);
   static const Color kGreen = Color(0xFF58B368);
+  static const Color kPurple = Color(0xFF8681FC);
   static const Color kPurpleDark = Color(0xFF343090);
   static const Color kCyan = Color(0xFF44C2FD);
   static const Color kYellow = Color(0xFFFAC736);
@@ -16,7 +17,7 @@ class AppColors {
   static final Map<String, Color> colorPalette = {
     'rosa': AppColors.kPink,
     'verde': AppColors.kGreen,
-    'roxo': AppColors.kPurpleDark,
+    'roxo': AppColors.kPurple,
     'ciano': AppColors.kCyan,
     'amarelo': AppColors.kYellow,
   };
