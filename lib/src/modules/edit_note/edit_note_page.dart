@@ -20,6 +20,7 @@ class EditNotePage extends StatefulWidget {
 class _EditNotePageState extends State<EditNotePage> with KeyboardManager {
   void _handleDeleteNote(EditNoteController controller) async {
     final bool delete = await showDialog<bool>(
+          barrierDismissible: false,
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
