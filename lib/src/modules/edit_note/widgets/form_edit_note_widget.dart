@@ -58,20 +58,19 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> with KeyboardMa
   void _handleSubmitForm() async {
     if (_formKey.currentState?.validate() == true) {
       final success = await _controller.saveNote();
-
       if (success) Navigator.pop(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<EditNoteController>(
-      builder: (_, controller, __) {
-        return Form(
-          key: _formKey,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Stack(
+    return Form(
+      key: _formKey,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Consumer<EditNoteController>(
+          builder: (context, controller, __) {
+            return Stack(
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -117,12 +116,22 @@ class _FormEditNoteWidgetState extends State<FormEditNoteWidget> with KeyboardMa
                     ),
                   ],
                 ),
-                ButtonSaveNoteWidget(onPressed: _handleSubmitForm),
+                Positioned(
+                  bottom: 14.0,
+                  right: 14.0,
+                  child: Visibility(
+                    visible: controller.buttonSaveVisible,
+                    child: ElevatedButtonWidget(
+                      onPressed: _handleSubmitForm,
+                      label: 'SALVAR',
+                    ),
+                  ),
+                ),
               ],
-            ),
-          ),
-        );
-      },
+            );
+          },
+        ),
+      ),
     );
   }
 }
